@@ -80,7 +80,7 @@ test(`Bottom tier desktop: ${bottomTierDesktop}`, async () => {
 });
 
 // expect BENCHMARK results:
-[
+for (const { input, expected } of [
   {
     expected: {
       gpu: 'intel uhd graphics 620',
@@ -233,7 +233,7 @@ test(`Bottom tier desktop: ${bottomTierDesktop}`, async () => {
       renderer: 'Mali-G51',
     },
   },
-].forEach(({ input, expected }) => {
+]) {
   test(`${input.renderer} should find ${expected.gpu}`, async () => {
     expectGPUResults(
       {
@@ -243,7 +243,7 @@ test(`Bottom tier desktop: ${bottomTierDesktop}`, async () => {
       await getTier(input)
     );
   });
-});
+}
 
 // expect FALLBACK results:
 [

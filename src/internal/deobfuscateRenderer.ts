@@ -6,9 +6,5 @@ export const deobfuscateRenderer = (
   renderer: string,
   isMobileTier: boolean
 ) => {
-  if (renderer === 'apple gpu') {
-    return deobfuscateAppleGPU(gl, renderer, isMobileTier);
-  } else {
-    return [renderer];
-  }
+  return renderer === 'apple gpu' ? deobfuscateAppleGPU(gl, renderer, isMobileTier) : [renderer];
 };

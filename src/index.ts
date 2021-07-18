@@ -126,7 +126,7 @@ export const getGPUTier = async ({
       ? (['adreno', 'apple', 'mali-t', 'mali', 'nvidia', 'powervr'] as const)
       : (['intel', 'amd', 'radeon', 'nvidia', 'geforce'] as const);
     for (const type of types) {
-      if (renderer.indexOf(type) > -1) {
+      if (renderer.includes(type)) {
         return type;
       }
     }
@@ -168,7 +168,7 @@ export const getGPUTier = async ({
 
     // If nothing matched, try comparing model names:
     if (!matched.length) {
-      matched = benchmarks.filter(([model]) => model.indexOf(renderer) > -1);
+      matched = benchmarks.filter(([model]) => model.includes(renderer));
 
       debug?.(
         `found ${matched.length} matching entries comparing model names`,
@@ -229,7 +229,7 @@ export const getGPUTier = async ({
     }
 
     if (!closest) {
-      return undefined;
+      return;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -287,10 +287,10 @@ export const getGPUTier = async ({
   );
 
   if (!results.length) {
-    const blocklistedModel: string | undefined = BLOCKLISTED_GPUS.filter(
+    const blocklistedModel: string | undefined = BLOCKLISTED_GPUS.find(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      (blocklistedModel) => renderer!.indexOf(blocklistedModel) > -1
-    )[0];
+      (blocklistedModel) => renderer!.includes(blocklistedModel)
+    );
     return blocklistedModel
       ? toResult(0, 'BLOCKLISTED', blocklistedModel)
       : toResult(1, 'FALLBACK', `${renderer} (${rawRenderer})`);

@@ -82,7 +82,7 @@ export const deobfuscateAppleGPU = (
       gl.vertexAttribPointer(aPosition, 3, GL_FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(aPosition);
 
-      gl.clearColor(1.0, 1.0, 1.0, 1.0);
+      gl.clearColor(1, 1, 1, 1);
       gl.clear(GL_COLOR_BUFFER_BIT);
       gl.viewport(0, 0, 1, 1);
       gl.drawArrays(GL_TRIANGLES, 0, 3);

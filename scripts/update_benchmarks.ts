@@ -46,8 +46,8 @@ const outputFile = async (name: string, content: any) => {
     .map((benchmark) => {
       benchmark.gpu = benchmark.gpu
         .toLowerCase()
-        .replace(/\s*\([^\)]+(\))/g, '')
-        .replace(/([0-9]+)\/[^ ]+/, '$1')
+        .replace(/\s*\([^)]+(\))/g, '')
+        .replace(/(\d+)\/[^ ]+/, '$1')
         .replace(
           /x\.org |inc\. |open source technology center |imagination technologies |™ |nvidia corporation |apple inc\. |advanced micro devices, inc\. | series$| edition$| graphics$/g,
           ''
@@ -99,7 +99,7 @@ const outputFile = async (name: string, content: any) => {
             fps:
               fpses[index] === ''
                 ? undefined
-                : Math.round(Number(fpses[index].replace(/[^0-9.]+/g, ''))),
+                : Math.round(Number(fpses[index].replace(/[^\d.]+/g, ''))),
             gpu: gpuNameLookup[gpuIndex],
             mobile: formFactorLookup[formFactor[index]].includes('mobile'),
             resolution: screenSizeLookup[screenSizes[index]],
